@@ -35,7 +35,7 @@ jobs:
       # Step 4: Train Model
       - name: Train Model
         run: |
-          python r'tests/train_model.py'
+          python 'tests/train_model.py'
 
           echo "RF and LR Model Score" >report.md
           cat scores.txt
