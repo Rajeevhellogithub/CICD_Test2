@@ -1,6 +1,5 @@
 name: CICD Test
 
-# Trigger the workflow on any push to the main branch or pull request
 on:
   push:
     branches: [ "main" ]
@@ -9,7 +8,6 @@ on:
 
 permissions:
   contents: write
-
 
 jobs:
   test:
@@ -36,7 +34,6 @@ jobs:
       - name: Train Model
         run: |
           python 'tests/train_model.py'
-
           echo "RF and LR Model Score" >report.md
           cat scores.txt
           
@@ -45,8 +42,21 @@ jobs:
           echo '|[](./FeatureImportance.png "FeatureImportance")' >> report1.md
      
           cat report.md report1.md >> combined_file.md
+
+      # Step 5: Setup Node.js for CML
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+
+      # Step 6: Install and Use CML
+      - name: Install CML
+        run: |
+          npm install -g @dvcorg/cml
+      - name: Create CML Comment
+        run: |
           cml comment create combined_file.md
 
-      # Step 5: Run tests
+      # Step 7: Run tests
       - name: Test with pytest
         run: pytest
