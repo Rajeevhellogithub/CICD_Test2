@@ -36,7 +36,7 @@ y_test = test_data.loc[:, 'target'].values.astype('int32')
 
 # Logistic Regression
 logreg = LogisticRegression(C=0.0001, solver='lbfgs', max_iter=100, multi_class='multinomial')
-logreg.fit(X_train, y_train, multi_class='ovr')
+logreg.fit(X_train, y_train)
 predictions_lr = logreg.predict(X_test)
 
 cm_lr = confusion_matrix(y_test, predictions_lr)
@@ -50,7 +50,7 @@ test_acc_lr = logreg.score(X_test, y_test) * 100
 
 # Random Forest
 rf_reg = RandomForestRegressor()
-rf_reg.fit(X_train, y_train, multi_class='ovr')
+rf_reg.fit(X_train, y_train)
 predictions_rf = rf_reg.predict(X_test)
 
 # Convert predictions to class labels
