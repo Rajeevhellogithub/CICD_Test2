@@ -38,6 +38,8 @@ jobs:
 
       # Step 5: Train Model
       - name: Train Model
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python 'tests/test_model.py'
           echo "RF and LR Model Score" >report.md
