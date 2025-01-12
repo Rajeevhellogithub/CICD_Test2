@@ -13,16 +13,14 @@ permissions:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
-      # Step 1: Check out the code from the repository
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      # Step 2: CML (Continuous Machine Learning) Commands
-      - name: CML Commands
-        uses: iterative/setup-cml@v1
+      # Step 1: Check out the code from the repository and CML (Continuous Machine Learning) Commands
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - uses: iterative/setup-cml@v1
 
       # Step 3: Set up Python environment
       - name: Set up Python
