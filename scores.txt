@@ -1,5 +1,5 @@
-Random Forest Train Var: 99.2%
-Random Forest Test Var: 93.7%
+Random Forest Train Var: 98.9%
+Random Forest Test Var: 94.6%
 F1 Score: 1.0%
 Recall Score: 1.0%
 Precision Score: 1.0%
