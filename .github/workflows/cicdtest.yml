@@ -1,5 +1,6 @@
 name: CICD Test
 
+# Trigger the workflow on any push to the main branch or pull request
 on:
   push:
     branches: [ "main" ]
@@ -8,6 +9,7 @@ on:
 
 permissions:
   contents: write
+
 
 jobs:
   test:
@@ -31,36 +33,16 @@ jobs:
           pip install -r requirements.txt
 
       # Step 4: Train Model
-      - name: Train Model and Generate Report
+      - name: Train Model
         run: |
-          python 'tests/test_model.py'
-          echo "RF and LR Model Score" > report.md
+          python train_model.py
+
+          echo "RF and LR Model Score" >report.md
           cat scores.txt
           
-          echo "Confusion Matrix & Feature Importance" > report1.md
+          echo "Confusion Matrix & Feature Importance">report1.md
           echo '|[](./ConfusionMatrix.png "ConfusionMatrix")' >> report1.md
           echo '|[](./FeatureImportance.png "FeatureImportance")' >> report1.md
      
           cat report.md report1.md >> combined_file.md
-
-      # Step 5: Setup Node.js for CML
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "16"
-
-      # Step 6: Install and Use CML
-      - name: Install CML
-        run: npm install -g @dvcorg/cml
-
-      - name: Debug Files
-        run: ls -l
-
-      - name: Create CML Comment
-        run: cml comment create combined_file.md
-        env:
-          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # Step 7: Run tests
-      - name: Test with pytest
-        run: pytest
+          cml comment create combined_file.md
