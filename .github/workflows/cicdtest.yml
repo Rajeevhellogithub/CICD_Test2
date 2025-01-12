@@ -59,3 +59,4 @@ jobs:
             combined_file.md
             ConfusionMatrix.png
             FeatureImportance.png
+            scores.txt
