@@ -43,7 +43,7 @@ jobs:
         run: |
           python 'tests/test_model.py'
           echo "RF and LR Model Score" >report.md
-          scores.txt
+          cat 'tests/scores.txt'
           echo "Confusion Matrix & Feature Importance">report1.md
           echo '|[](tests/ConfusionMatrix.png "ConfusionMatrix")' >> report1.md
           echo '|[](tests/FeatureImportance.png "FeatureImportance")' >> report1.md
