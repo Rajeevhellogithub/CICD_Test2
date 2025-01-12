@@ -60,3 +60,12 @@ jobs:
             ConfusionMatrix.png
             FeatureImportance.png
             scores.txt
+            
+      # Step 6: Commit Files
+      - name: Commit Results
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add combined_file.md ConfusionMatrix.png FeatureImportance.png scores.txt
+          git commit -m "Add model reports and outputs"
+          git push
