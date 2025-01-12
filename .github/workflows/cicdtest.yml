@@ -3,14 +3,13 @@ name: CICD Test
 # Trigger the workflow on any push to the main branch or pull request
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
   pull_request:
-    branches:
-      - main
+    branches: [ "main" ]
 
 permissions:
   contents: write
+  id-token: write
 
 jobs:
   test:
@@ -21,19 +20,23 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      # Step 2: Set up Python environment
+      # Step 2: CML (Continuous Machine Learning) Commands
+      - name: CML Commands
+        uses: iterative/setup-cml@v1
+
+      # Step 3: Set up Python environment
       - name: Set up Python
         uses: actions/setup-python@v3
         with:
           python-version: "3.10"
 
-      # Step 3: Install dependencies
+      # Step 4: Install dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Step 4: Train Model
+      # Step 5: Train Model
       - name: Train Model
         run: |
           python 'tests/test_model.py'
