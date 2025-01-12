@@ -3,9 +3,11 @@ name: CICD Test
 # Trigger the workflow on any push to the main branch or pull request
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 permissions:
   contents: write
